@@ -1,0 +1,114 @@
+using System;
+
+namespace ClassNotes 
+{
+  class Program
+{
+  public static void Main()
+  {
+    Console.WriteLine("Rock, Paper, Scissors!");
+    String userInput = Console.ReadLine();
+
+    // static String compareHands(String hand1, String hand2){
+    //   //this method is pretty dumb, it always sau=ys tie
+    //   // it shoudl really return "tie" if hand 1 is equal to hand2
+    //   // or return Player 1 if hand1 is the winning hand
+    //   // or return Player 2 if hand1 is the winning method
+    //   return "Tie";
+
+
+    }
+
+
+  //   // ask user for a number
+  //   int num1 = getNumber();
+  //   //ask user for a number
+  //   int num2 = getNUmber();
+  //   // add 2 numbers together
+  //   int sum = addNUmbers(num1, num2);
+  //   // print out the sum of the 2 numbers
+  //   Console.WriteLine("The sum is "+sum);
+
+
+  // }
+
+  // static int getNumber(){
+  //   // it's dumb, always returns 2
+  //   // should ask the user for a number instead of just returning 2
+  //   return 2;
+  // }
+  // static int addNumbers(int x, int y){
+  //   // this method is also dumb, always returns 0
+  //   // it shoudl really retuen the two numbers added together
+  //   return 0;
+  // }
+
+
+
+
+    // ask a user for a number, print out if the number is positive or negative
+
+    // Console.Writeline("Enter a number");
+    // string userInput = Console.ReadLine();
+    // int theNumber = Convert.ToInt32(userInput);
+
+    // if(theNumber > 0){
+    //   Console.WriteLIne("You entered a positive number.");
+    // } else if (theNumber <0) {
+    //   Console.WriteLine("You entered a negative number.");
+    // } else {
+    //   Console.WriteLine("You entered 0. Your number is neither negative or positive.");
+    // }
+   
+
+  //  Console.WriteLIne("Enter an age");
+  //  String userInput = Console.ReadLine();
+  //  int age = Convert.ToInt32(userInput);
+
+  //  if(age < 1){
+  //    Console.WriteLine("baby");
+  //  } if else(age < 3){
+  //    Console.WriteLine("toddler");
+  //  }
+
+
+  // Random generator = new Random();
+  // int randomNumber = generator.Next();
+  // }
+
+
+  // static int sum(int num1, int num2){
+  //   int result = num1 + num2;
+  //   return result;
+  // }
+
+  // static int greaterOfTwo(int num2, int num1){
+  //   if(num1 > num2){
+  //     return num1;
+  //   } else {
+  //     return num2;
+  //   }
+
+  //   int x = sum(a,b);
+  //   int a = 4;
+  //   int b = 5;
+   
+   
+  //   int x = sum(a,b);
+  //   int a = Convert.ToInt32("4");
+  //   int b = 5;
+
+  //   Console.WriteLine("Enter a either 0,1, or 2");
+  //   String userInput = Console.ReadLIne();
+  //   int a = Convert.ToInt32(userInput);
+  //   int b = 5;
+
+
+
+
+  }
+
+
+}
+
+}

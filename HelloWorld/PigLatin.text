@@ -1,0 +1,37 @@
+using System;
+
+namespace PigLatin 
+{
+  class Program
+{
+  public static void Main()
+  {
+    // code goes here
+
+    string word;
+    string alphabet = "abcdefghijklmnopqrstuvwxyz";
+    char[] vowels = {"a", "e", "i", "o", "u"};
+
+    string firstPart = word.Substring(0, firstVowelIndex);
+    string secondPart = word.substring (firstVowelIndex);
+    return secondPart + firstPart + "ay";
+
+
+    
+
+    // elephant -> elephanyay
+    // fox -> oxfay
+    // are -> areyay
+    // mine -> inemay
+    // thing -> ingthey
+
+    //extra credit
+    // treat y as a vowel when its in the middle of the word
+    // treat y as a consonant when it is in the beginning of the word
+
+    // yellow -> ellowyay
+    // rhythm -> ythmrhay
+  }
+}
+
+}
