@@ -3,14 +3,16 @@
 namespace TicTacToe
 {
     class Program
-    {
-        public static string playerTurn = "X";
-        public static string[][] board = new string[][]
-        {
-            new string[] {" ", " ", " "},
-            new string[] {" ", " ", " "},
-            new string[] {" ", " ", " "}
-        };
+     {
+    //     public static string playerTurn = "X";
+    //     playerTurn = (playerTurn == "X") ? "O" : "X";
+
+    //     public static string[][] board = new string[][]
+    //     {
+    //         new string[] {" ", " ", " "},
+    //         new string[] {" ", " ", " "},
+    //         new string[] {" ", " ", " "}
+    //     };
 
         public static void Main()
         {
@@ -27,16 +29,21 @@ namespace TicTacToe
 
         public static void GetInput()
         {
-            Console.WriteLine("Player " + playerTurn);
-            Console.WriteLine("Enter Row:");
-            int row = int.Parse(Console.ReadLine());
-            Console.WriteLine("Enter Column:");
-            int column = int.Parse(Console.ReadLine());
+            // Console.WriteLine("Player " + playerTurn);
+            // Console.WriteLine("Enter Row:");
+            // int row = int.Parse(Console.ReadLine());
+            // Console.WriteLine("Enter Column:");
+            // int column = int.Parse(Console.ReadLine());
+            // PlaceMark(row, column);
         }
 
         public static void PlaceMark(int row, int column)
-        {
-        // your code goes here
+        { 
+           // board[row][column] = playerTurn;
+
+
+    
+        
         }
 
         public static bool CheckForWin()
@@ -76,12 +83,12 @@ namespace TicTacToe
 
         public static void DrawBoard()
         {
-            Console.WriteLine("  0 1 2");
-            Console.WriteLine("0 " + String.Join("|", board[0]));
-            Console.WriteLine("  -----");
-            Console.WriteLine("1 " + String.Join("|", board[1]));
-            Console.WriteLine("  -----");
-            Console.WriteLine("2 " + String.Join("|", board[2]));
+            // Console.WriteLine("  0 1 2");
+            // Console.WriteLine("0 " + String.Join("|", board[0]));
+            // Console.WriteLine("  -----");
+            // Console.WriteLine("1 " + String.Join("|", board[1]));
+            // Console.WriteLine("  -----");
+            // Console.WriteLine("2 " + String.Join("|", board[2]));
         }
     }
 }
