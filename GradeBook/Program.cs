@@ -34,12 +34,20 @@ namespace GradeBook
             for (int i = 0; i<5; i++)
             {           
             Console.WriteLine("Student name?");
-            string studentName = Console.ReadLine();
+            String studentName = Console.ReadLine();
             Console.WriteLine("4 student grades? Separate with space.");
-            string studentGrades = Console.ReadLine();
-            string[] grades = studentGrades.Split(" ");
+            String studentGrades = Console.ReadLine();
+            String[] grades = studentGrades.Split(" ");
             Console.WriteLine(String.Join(" ", grades));
+            dictionary.Add(studentName, grades);
             }
+            Dictionary<String,string[]> gradebook = new Dictionary<String, String[]>();
+
+            foreach(var Key in gradebook.Keys){
+                Console.WriteLine(studentName+":");
+                foreach(var StudentGrades in )
+            }
+
         }
     }
 }
