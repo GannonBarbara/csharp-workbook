@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Checkpoint1
 {
@@ -10,26 +11,31 @@ namespace Checkpoint1
                 // Display the count on the console.
                 
             List<int> div_list = new List<int>();
-            for (int i = 1; i <= 100; i++)
+            for (int i = 1; i < 101; i++)
             {
                 
                 if ( i % 3 == 0)
                 {   
                    div_list.Add(i);
+                } else 
+                {
+                    break;
                 }
+                int count = div_list.Count; 
+                Console.WriteLine("There are {0} numbers between 1 & 100 divisible by 3 with no remainder.", count);
 
             }
 
             // 2- Write a program and continuously ask the user to enter a number or "ok" to exit.
                 // Calculate the sum of all the previously entered numbers and display it on the console.
 
-            Console.WriteLine("Enter a number or type 'ok' to exit.");
-            String UserInput = Console.ReadLine();
+            // Console.WriteLine("Enter a number or type 'ok' to exit.");
+            // String UserInput = Console.ReadLine();
 
-            int n = Convert.ToInt32(UserInput);
+            // int n = Convert.ToInt32(UserInput);
 
 
-            if ()
+            // if ()
             
             
 
@@ -46,9 +52,10 @@ namespace Checkpoint1
                 //guess the number. If the user guesses the number, display “You won"; otherwise, display 
                 // “You lost". (To make sure the program is behaving correctly, you can display the secret number on the console first.)
 
-            for (int i; i <=10; i++)
-            {
-                int r = Random = new Random.Random(1, 10);
+            // for (int i; i <=10; i++)
+            // {
+            //     Random generator= new Random();
+            //     int num4 = generator.Next(1,11);
 
 
             }
