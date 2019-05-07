@@ -25,7 +25,12 @@ namespace Checkpoint1
                 Console.WriteLine("There are {0} numbers between 1 & 100 divisible by 3 with no remainder.", count);
 
             }
+        }
+                
+    }      
 
+}
+    
             // 2- Write a program and continuously ask the user to enter a number or "ok" to exit.
                 // Calculate the sum of all the previously entered numbers and display it on the console.
 
@@ -58,11 +63,11 @@ namespace Checkpoint1
             //     int num4 = generator.Next(1,11);
 
 
-            }
+//             }
 
-            // 5- Write a program and ask the user to enter a series of numbers separated by comma.
-                // Find the maximum of the numbers and display it on the console. For example, if the user
-                    // enters “5, 3, 8, 1, 4", the program should display 8.
-        }
-    }
-}
+//             // 5- Write a program and ask the user to enter a series of numbers separated by comma.
+//                 // Find the maximum of the numbers and display it on the console. For example, if the user
+//                     // enters “5, 3, 8, 1, 4", the program should display 8.
+//         }
+//     }
+// }
