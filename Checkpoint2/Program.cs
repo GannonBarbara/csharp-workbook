@@ -22,12 +22,12 @@ namespace Checkpoint2
         {
             this.position = position;
             this.color = color;
-            if(color == "white") 
+            if(color == "○") 
             {
-                symbol = "X";
+                symbol = "&#10686";
             } else if(color == "black")
             {
-                symbol = "O";
+                symbol = "•";
             }
         }
 
@@ -81,10 +81,8 @@ namespace Checkpoint2
                     Console.WriteLine("Invalid Move");
                 }
             }
-
-
-
             
+            DrawBoard();   
         }
 
         public Checker SelectChecker(int row, int column)
@@ -143,8 +141,29 @@ namespace Checkpoint2
                 checkers.Add(c5);
             }   
         }
-
-
+        public bool CheckForWin()
+        {
+            int numblack = 0;
+            int numwhite = 0;
+            foreach(Checker c in checkers)
+            {
+                if(c.color == "white")
+                {
+                    numwhite += 1;
+                }
+                if(c.color == "black")
+                {
+                    numblack += 1;
+                }
+            } 
+            if(numwhite > 0 && numblack >0)
+            {
+                return false;
+            } else
+            {
+                return true;
+            }
+        }
     }
     public class Game
     {
@@ -154,7 +173,12 @@ namespace Checkpoint2
 
             brd.GenerateCheckers();
             brd.DrawBoard();
-            brd.MoveChecker();
+            
+            
+            while(!brd.CheckForWin())
+            {
+                brd.MoveChecker();
+            }
         }
     }
 }
