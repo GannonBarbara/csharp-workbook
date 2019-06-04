@@ -17,7 +17,16 @@ namespace EF
             Console.WriteLine("Book type:");
             String UserInputType = Console.ReadLine();
 
-            dao.create(UserInputTitle, UserInputType);
+            
+            if(UserInputType == "Biography")
+            {
+                dao.create(UserInputTitle, Type.Biography);
+            } else if (UserInputType == "Fiction")
+            {
+                dao.create(UserInputTitle, Type.Fiction);
+            } else{
+                dao.create(UserInputTitle, Type.Kids);
+            }
 
             
             foreach(Book b in dao.listBooks())
