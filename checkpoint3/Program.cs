@@ -11,7 +11,7 @@ namespace checkpoint3
         static void Main(string[] args)
         {
             App app = new App();
-            App.start();
+            app.start();
             
         }
     }
@@ -31,20 +31,19 @@ namespace checkpoint3
         public void start()
         {
             ui.PrintMenu();
-            string UInput = Console.ReadLine();
-            ui.GetInput(UInput);
+
         }
     }
     public class Dao // what to do with items on list
     {
         public List<Items> ToDos { get; private set;}
-        private ToDoContext Context;
+        public ToDoContext Context {get; set;}
 
-        public UI ui;
+        public UI ui{get; set;}
         public Dao()
         {
             Context = new ToDoContext();
-            Context.ToDoItems.EnsureCreated();
+            Context.Database.EnsureCreated();
         }
          
         // return the current list of ToDos
@@ -60,57 +59,57 @@ namespace checkpoint3
         {
 
         }
-        public void CreateItem(String ToDo, int id) // enum here?
-        {
-            if (ui.input == "New" || ui.input == "new") 
-            {
-                ToDo = Console.ReadLine(); // need to put new?
-            }
-            Items item = new Items("doing stuff");
-            context.ToDoItems.Add(newToDo);
-            context.SaveChanges();
+        public void CreateItem() // enum here?
+        { 
+            Console.WriteLine("Enter new to-do item:");
+            string UInput = Console.ReadLine();
+            ui.GetInput(UInput);
+            Items item = new Items(ui.input);
+            Context.ToDoItems.Add(item);
+            Context.SaveChanges();
         }
 
-        public SelectItem()
+        public void ToDoList(){
+            foreach(Items a in Context.ToDoItems) 
+            {
+                Console.WriteLine("{0} {1}", a.id, a.ToDo);
+            }
+        }
+
+        public void SelectItem()
         {
-            if (input = "Select" || "select")
+            if (ui.input == "Select" || ui.input =="select")
             {
                 Console.WriteLine("Which #?");
-                public string selection = Console.ReadLine();
+                string selection = Console.ReadLine();
 
             }
         }
-        public DeleteItem()
+        public void DeleteItem()
         {
-            if (input = "Delete" || "delete")
-            {
 
-            }
-
-        }
-        public List<ToDo> ToDoList(){
-            List<ToDo> result  = new List<ToDo>();
-            foreach(ToDo a in context.ToDos) 
-            {
-                result.Add(a);
-            }
-            return result;
         }
 
     }
     public class UI // user interaction
     {
         public String input {get; set;}
+        public Dao dao;
         public void PrintMenu()
         {
             Console.WriteLine("List of Commands:");
-            Console.Write("New = create new item");
+            Console.WriteLine("New = create new item");
             Console.WriteLine("Select = select item");
             Console.WriteLine("Done = mark done");
             Console.WriteLine("Delete = delete item");
             Console.WriteLine("Show = display to-do list");
             Console.WriteLine("Show done = display completed to-do items");
             Console.WriteLine("Show not done = display all to-do items pending completion");
+            string input = Console.ReadLine();
+            if (input == "New" || input == "new")
+            {
+                dao.CreateItem();
+            }
         }
         public string GetInput(string input) // how connect to printmenu()
         {
@@ -131,6 +130,10 @@ namespace checkpoint3
         
         public int id  {get; set;}
         public String ToDo {get; set;} // contains content of todo item
+        public Items()
+        {
+
+        }
         public Items(String iToDo)
         {
             this.ToDo = iToDo;
