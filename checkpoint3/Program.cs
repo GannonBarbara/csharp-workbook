@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Sqlite;
 
 namespace checkpoint3
 {
@@ -9,13 +11,13 @@ namespace checkpoint3
         static void Main(string[] args)
         {
             App app = new App();
-            App.start;
+            App.start();
             
         }
     }
     public class Controller // not sure necessary--different from app?
     {
-        
+
     }
     public class App //facilitates program/gets things started/ calls UI class
     {
@@ -28,43 +30,47 @@ namespace checkpoint3
         }
         public void start()
         {
-            PrintMenu();
-            GetInput();
-
+            ui.PrintMenu();
+            string UInput = Console.ReadLine();
+            ui.GetInput(UInput);
         }
     }
     public class Dao // what to do with items on list
     {
-        public List<Items> ToDos {public get; private set;}
+        public List<Items> ToDos { get; private set;}
         private ToDoContext Context;
 
+        public UI ui;
         public Dao()
         {
             Context = new ToDoContext();
-            Context.DataBase.EnsureCreated();
+            Context.ToDoItems.EnsureCreated();
         }
          
         // return the current list of ToDos
-        public GetAll()
+        public void GetAll()
         {
 
         }
-        public GetDone()
+        public void GetDone()
         {
 
         }
-        public GetPending()
+        public void GetPending()
         {
 
         }
-        public CreateItem()
+        public void CreateItem(String ToDo, int id) // enum here?
         {
-            if (input = "New" || "new")
+            if (ui.input == "New" || ui.input == "new") 
             {
                 ToDo = Console.ReadLine(); // need to put new?
             }
-
+            Items item = new Items("doing stuff");
+            context.ToDoItems.Add(newToDo);
+            context.SaveChanges();
         }
+
         public SelectItem()
         {
             if (input = "Select" || "select")
@@ -94,8 +100,8 @@ namespace checkpoint3
     }
     public class UI // user interaction
     {
-        public String input;
-        public PrintMenu()
+        public String input {get; set;}
+        public void PrintMenu()
         {
             Console.WriteLine("List of Commands:");
             Console.Write("New = create new item");
@@ -106,41 +112,40 @@ namespace checkpoint3
             Console.WriteLine("Show done = display completed to-do items");
             Console.WriteLine("Show not done = display all to-do items pending completion");
         }
-        public GetInput() // how connect to printmenu()
+        public string GetInput(string input) // how connect to printmenu()
         {
-            public String input = Console.ReadLine();
+            input = Console.ReadLine();
+            return input;
+        }
+        public void printMessage()
+        {
 
         }
-        public printMessage()
-        {
-
-        }
-        public PrintError()
+        public void PrintError()
         {
             Console.WriteLine("Invalid entry");
         }
-
-
     }
     public class Items // properties of items on list
     {
-        public String ToDo{get; set;} // contains content of todo item
-        public int id = 0;
-        public enum status() // delete, add, replace?
+        
+        public int id  {get; set;}
+        public String ToDo {get; set;} // contains content of todo item
+        public Items(String iToDo)
         {
-
+            this.ToDo = iToDo;
         }
-
-
-
+        public enum Status
+        {
+           done, pending 
+        }
     }
-      public class  ToDoContext : DbContext
+    public class  ToDoContext : DbContext
     {
-        public DbSet<ToDo> ToDoItems { get; private set; }
+        public DbSet<Items> ToDoItems { get; private set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlite("Filename = items.db");
-
         }
     }
 }
