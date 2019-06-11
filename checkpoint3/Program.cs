@@ -40,46 +40,45 @@ namespace checkpoint3
             Context = new ToDoContext();
             Context.Database.EnsureCreated();
         }
-         
-        // return the current list of ToDos
-        public void GetAll()
+        public void MarkDone(Items selection)
         {
-
-        }
-        public void GetDone()
-        {
-
-        }
-        public void GetPending()
-        {
-
+            selection.status = Status.done;
+            Context.SaveChanges();   
+            App app2 = new App();
+            app2.start();
         }
         public void CreateItem(String task) // logic in app class
         { 
             Items item = new Items(task);
             Context.ToDoItems.Add(item);
             Context.SaveChanges();
+            App app2 = new App();
+            app2.start();
         }
-
+        public void DeleteItem(int id)
+        {
+            Items ite = SelectItem(id);
+            Context.ToDoItems.Remove(ite);
+            Context.SaveChanges();
+            App app2 = new App();
+            app2.start();
+        }
         public void ToDoList(){
             foreach(Items a in Context.ToDoItems) 
             {
                 Console.WriteLine("{0} {1}", a.id, a.ToDo);
+                App app2 = new App();
+                app2.start();
             }
         }
-
-        public IQueryable<Items> SelectItem(int id)
+        public Items SelectItem(int id)
         {
             var item = from i in Context.ToDoItems
                 where i.id.Equals(id)
                 select i;
-            return item;
+            return item.First();
         }
-        public void DeleteItem()
-        {
-
-        }
-
+       
     }
     public class UI // user interaction
     {
@@ -89,39 +88,84 @@ namespace checkpoint3
             Console.WriteLine("List of Commands:");
             Console.WriteLine("New = create new item");
             Console.WriteLine("Select = select item");
-            Console.WriteLine("Done = mark done");
-            Console.WriteLine("Delete = delete item");
             Console.WriteLine("Show = display to-do list");
             Console.WriteLine("Show done = display completed to-do items");
             Console.WriteLine("Show not done = display all to-do items pending completion");
-            string input = Console.ReadLine();
-            if (input == "New" || input == "new")
-            {
-                Console.WriteLine("Enter task:");
-                String NewTask = Console.ReadLine();
-                dao.CreateItem(NewTask);
-            }
-            if (input == "Select" || input == "select")
-            {
-                Console.WriteLine("Which #?");
-                int id = Convert.ToInt32(Console.ReadLine());
-                dao.SelectItem(id);
-            }
-            if (input == "Show" || input == "show")
-            {
-                Console.WriteLine("To-do List:");
-                foreach (Items item in dao.Context.ToDoItems)
-                {
-                   Console.WriteLine("{0} {1} {2}", item.id, item.ToDo, item.status);
-                }
-                Console.WriteLine();
-
-            }
+            Console.WriteLine("Quit = exit app");              
         }
-        public string GetInput() // how connect to printmenu()
+        public void GetInput() // how connect to printmenu()
         {
-            String input = Console.ReadLine();
-            return input;
+            string input = Console.ReadLine();
+            while(input != "quit" || input != "Quit")
+            {
+                if (input == "New" || input == "new")
+                {
+                    Console.WriteLine("Enter task:");
+                    String NewTask = Console.ReadLine();
+                    dao.CreateItem(NewTask);
+                }
+                if (input == "Select" || input == "select")
+                {
+                    Console.WriteLine("Which #?");
+                    int id = Convert.ToInt32(Console.ReadLine());
+                    Items i = dao.SelectItem(id);
+                    Console.WriteLine(i.ToDo);
+                    Console.WriteLine("What do you want to do with this item?");
+                    Console.WriteLine("Done = mark done");
+                    Console.WriteLine("Delete = delete item");
+                    var input2 = Console.ReadLine();
+                    if (input2 == "Done" || input2 == "done")
+                    {
+                        dao.MarkDone(i);
+
+                    }
+                    if (input2 == "Delete" || input2 == "delete")
+                    {
+                        dao.DeleteItem(id);
+                    }
+                }
+                if (input == "Show" || input == "show")
+                {
+                    Console.WriteLine("To-do List:");
+                    foreach (Items item in dao.Context.ToDoItems)
+                    {
+                    Console.WriteLine("{0} {1} {2}", item.id, item.ToDo, item.status);
+                    }
+                    App app2 = new App();
+                    app2.start();
+
+                }
+                if (input == "Show done" || input == "Show Done" || input == "show done")
+                {
+                    Console.WriteLine("Done items:");
+                    foreach (Items Item in dao.Context.ToDoItems)
+                    {
+                        if (Item.status == Status.done)
+                        {
+                            Console.WriteLine("{0} {1} {2}", Item.id, Item.ToDo, Item.status);
+                            App app2 = new App();
+                            app2.start();
+                        }
+                                        
+                    }
+                }
+                if (input == "show not done" || input == "Show Not Done" || input == "Show not done")
+                {
+                    Console.WriteLine("Pending items:");
+                    foreach (Items Item in dao.Context.ToDoItems)
+                    {
+                        if (Item.status == Status.pending)
+                        {
+                            Console.WriteLine("{0} {1} {2}", Item.id, Item.ToDo, Item.status);
+                            App app2 = new App();
+                            app2.start();
+                        }
+                                        
+                    }
+
+                }
+            }
+
         }
         public void PrintError()
         {
@@ -142,14 +186,14 @@ namespace checkpoint3
     }
     public enum Status
     {
-        done, pending
+        pending, done
     }
     public class  ToDoContext : DbContext
     {
         public DbSet<Items> ToDoItems { get; private set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("Filename = items.db");
+            optionsBuilder.UseSqlite("Filename = items1.db");
         }
     }
 }
